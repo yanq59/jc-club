@@ -1,2 +1,39 @@
+# 服务器配置
 server:
-  port: 3000
+  port: 3000 # 服务器端口号
+
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIG/iU98/2wsOq1IolSGI7+auXJkN+GPjVNcA3qVhnjC17vg3I2J0nQkyfv7supI8yikroJ9JlvUAhIKIIg/UTMCAwEAAQ==
+# Spring配置
+spring:
+  datasource: # 数据源配置
+    username: root # 数据库用户名
+    password: bFlSB/TS3B8sdnVOOIfElvsS1Vcql9s9X33TVizj4y9uSersZkKBq0urLkivgoyVZr9cPN2Or4hTQ3CU7TIc5g==
+    driver-class-name: com.mysql.cj.jdbc.Driver # 数据库驱动类名
+    url: jdbc:mysql://116.196.120.35:3306/jc_club?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false # 数据库连接URL
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
+    druid: # Druid数据源配置
+      initial-size: 20 # 初始化大小
+      min-idle: 20 # 最小空闲连接数
+      connectionProperties: config.decrypt=true;config.decrypt.key=${publicKey};
+      max-active: 100 # 最大活跃连接数
+      max-wait: 60000 # 最大等待时间
+      stat-view-servlet: # Druid监控配置
+        enabled: true # 是否启用监控
+        url-pattern: /druid/* # 监控URL模式
+        login-username: admin # 监控登录用户名
+        login-password: 123456 # 监控登录密码
+      filter: # 过滤器配置
+        stat: # 统计过滤器
+          enabled: true # 是否启用
+          slow-sql-millis: 2000 # 慢SQL执行时间阈值
+          log-slow-sql: true # 是否记录慢SQL
+        wall: # 防火墙过滤器
+          enabled: true # 是否启用
+        config: # 配置过滤器
+          enabled: true # 是否启用
+
+
+
+
+
+
