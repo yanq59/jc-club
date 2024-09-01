@@ -31,7 +31,8 @@ spring:
           enabled: true # 是否启用
         config: # 配置过滤器
           enabled: true # 是否启用
-
+logging:
+  config: classpath:log4j2-spring.xml
 
 
 

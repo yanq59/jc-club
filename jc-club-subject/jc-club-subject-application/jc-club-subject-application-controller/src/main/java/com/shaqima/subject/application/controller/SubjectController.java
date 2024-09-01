@@ -2,8 +2,7 @@ package com.shaqima.subject.application.controller;
 
 import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 import com.shaqima.subject.infra.basic.service.SubjectCategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -13,7 +12,9 @@ import javax.annotation.Resource;
  * @Author : wang.yanqi
  * @Date: 2024/8/30 22:44
  */
+@CrossOrigin("*")
 @RestController
+//@RequestMapping("/neu/qqq")
 public class SubjectController {
 
     @Resource
