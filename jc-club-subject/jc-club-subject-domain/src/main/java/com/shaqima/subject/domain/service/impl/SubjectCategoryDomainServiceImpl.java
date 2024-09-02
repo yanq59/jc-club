@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @Description :
@@ -27,12 +29,31 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Override
     public void add(SubjectCategoryBO subjectCategoryBO) {
 
-        if(log.isInfoEnabled()){
+        // 判断日志是否启用了info级别
+        if (log.isInfoEnabled()) {
+            // 打印日志
             log.info("subjectCategoryController.add.bo:{}", JSON.toJSONString(subjectCategoryBO));
         }
 
+        // 将subjectCategoryBO转换为SubjectCategory
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOtoCategory(subjectCategoryBO);
 
+        // 调用subjectCategoryService的insert方法，将subjectCategory插入数据库
         subjectCategoryService.insert(subjectCategory);
+    }
+
+    @Override
+    public List<SubjectCategoryBO> queryPrimaryCategoryList() {
+        SubjectCategory subjectCategory = new SubjectCategory();
+        subjectCategory.setParentId(0L);
+
+        List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryParimaryCategory(subjectCategory);
+        List<SubjectCategoryBO> boList = SubjectCategoryConverter.INSTANCE.convertCategoryToBO(subjectCategoryList);
+
+        if (log.isInfoEnabled()) {
+            log.info("subjectCategoryController.queryPrimaryCategoryList.boList:{}", JSON.toJSONString(boList));
+        }
+
+        return boList;
     }
 }

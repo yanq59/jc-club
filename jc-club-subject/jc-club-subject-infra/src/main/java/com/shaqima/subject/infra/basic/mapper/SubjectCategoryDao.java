@@ -73,5 +73,7 @@ public interface SubjectCategoryDao {
      */
     int deleteById(Long id);
 
+
+    List<SubjectCategory> queryParimaryCategory(SubjectCategory subjectCategory);
 }
 

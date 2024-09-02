@@ -6,6 +6,8 @@ import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @Description : 将 DTO 转换成 domain 里面的 BO
  * @Author : wang.yanqi
@@ -18,5 +20,8 @@ public interface SubjectCategoryDTOConverter {
     SubjectCategoryDTOConverter INSTANCE = Mappers.getMapper(SubjectCategoryDTOConverter.class);
 
     // 将SubjectCategoryDTO转换为SubjectCategoryBO
-    SubjectCategoryBO convertDTOtoCategoryBO(SubjectCategoryDTO SubjectCategoryDTO);
+    SubjectCategoryBO convertDTOtoCategoryBO(SubjectCategoryDTO subjectCategoryDTO);
+
+    // 将SubjectCategoryBO转换为SubjectCategoryDTO
+    List<SubjectCategoryDTO> convertCategoryBOtoDTOList(List<SubjectCategoryBO> subjectCategoryBOList);
 }

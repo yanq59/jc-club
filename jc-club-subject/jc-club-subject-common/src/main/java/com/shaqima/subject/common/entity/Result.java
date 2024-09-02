@@ -2,6 +2,7 @@ package com.shaqima.subject.common.entity;
 
 import com.shaqima.subject.common.enums.ResultCodeEnum;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Description : 写 返回给前端的内容
@@ -9,6 +10,7 @@ import lombok.Data;
  * @Date: 2024/9/1 17:20
  */
 @Data
+@Slf4j
 public class Result<T> {
 
     private Boolean success;
@@ -27,7 +29,6 @@ public class Result<T> {
         return result;
     }
 
-//    静态方法 泛型 得写在 static 后面
     public static <T> Result ok(T data){
         Result result = new Result();
         result.setSuccess(true);
@@ -37,24 +38,25 @@ public class Result<T> {
         return result;
     }
 
-
     public static Result fail(){
         Result result = new Result();
-        result.setSuccess(true);
+        result.setSuccess(false);
         result.setCode(ResultCodeEnum.FAIL.getCode());
         result.setMessage(ResultCodeEnum.FAIL.getDesc());
         return result;
     }
 
-    //    静态方法 泛型 得写在 static 后面
     public static <T> Result fail(T data){
+        System.out.println("fail method called with data: " + data);
         Result result = new Result();
         result.setSuccess(false);
         result.setCode(ResultCodeEnum.FAIL.getCode());
         result.setMessage(ResultCodeEnum.FAIL.getDesc());
         result.setData(data);
+        log.debug("Result.fail called with data: {}", data);
         return result;
     }
+
 
 
 }
