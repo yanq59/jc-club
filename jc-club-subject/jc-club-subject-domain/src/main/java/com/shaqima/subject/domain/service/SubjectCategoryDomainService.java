@@ -15,7 +15,17 @@ public interface SubjectCategoryDomainService {
     void add(SubjectCategoryBO subjectCategoryBO);
 
     /**
-     * 查询岗位大类
+     * 更新分类
+     * @param subjectCategoryBO
+     * @return
      */
-    List<SubjectCategoryBO> queryPrimaryCategoryList();
+//    List<SubjectCategoryBO> queryPrimaryCategoryList();
+    List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO);
+
+    /**
+     * 更新分类
+     * @param subjectCategoryBO
+     * @return
+     */
+    Boolean update(SubjectCategoryBO subjectCategoryBO);
 }

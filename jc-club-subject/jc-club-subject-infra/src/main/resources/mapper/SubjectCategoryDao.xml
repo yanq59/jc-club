@@ -38,12 +38,12 @@
 <!--            <if test="categoryType != null">-->
 <!--                and category_type = #{categoryType}-->
 <!--            </if>-->
-<!--            <if test="imageUrl != null and imageUrl != ''">-->
-<!--                and image_url = #{imageUrl}-->
-<!--            </if>-->
-<!--            <if test="parentId != null">-->
-<!--                and parent_id = #{parentId}-->
-<!--            </if>-->
+<!--            <if test="imageUrl != null and imageUrl != // 将subjectCategoryBO转换为SubjectCategory
+SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOtoCategory(subjectCategoryBO);
+// 更新subjectCategory
+int count = subjectCategoryService.update(subjectCategory);
+// 返回更新结果
+return count > 0;if>-->
 <!--            <if test="createdBy != null and createdBy != ''">-->
 <!--                and created_by = #{createdBy}-->
 <!--            </if>-->
@@ -173,7 +173,7 @@
         delete from subject_category where id = #{id}
     </delete>
 
-    <select id="queryParimaryCategory" resultMap="SubjectCategoryMap">
+    <select id="queryCategory" resultMap="SubjectCategoryMap">
         select * from subject_category
         <where>
             <if test="id != null">

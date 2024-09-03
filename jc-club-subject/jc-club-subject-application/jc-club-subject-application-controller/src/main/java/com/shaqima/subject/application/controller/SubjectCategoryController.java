@@ -46,8 +46,9 @@ public class SubjectCategoryController {
             }
 
 //          参数校验(相当于断言)
+//          如果不满足条件直接 异常 走 catch 那步
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryName(), "分类名称不能为空");
-            Preconditions.checkArgument(StringUtils.isEmpty(subjectCategoryDTO.getCategoryName()), "分类名称不能为空");
+//            Preconditions.checkArgument(StringUtils.isEmpty(subjectCategoryDTO.getCategoryName()), "分类名称不能为空1");
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类父级id不能为空");
 
             // 将DTO转换为BO
@@ -65,13 +66,14 @@ public class SubjectCategoryController {
 
     /**
      * @Description : 查询分类及标签
-     * @return
+     * @return Result
      */
     @PostMapping("/queryPrimaryCategoryList")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategoryList(){
         try{
+            SubjectCategoryBO subjectCategoryBO = new SubjectCategoryBO();
             // 查询一级分类列表
-            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryPrimaryCategoryList();
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
             // 将BO转换为DTO
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convertCategoryBOtoDTOList(subjectCategoryBOList);
             // 返回成功结果
@@ -80,9 +82,69 @@ public class SubjectCategoryController {
             // 记录错误日志
             log.error("subjectCategoryController.queryPrimaryCategoryList.error:{}", e.getMessage(),e);
             // 返回失败结果
-            return Result.fail("查询失败");
+            return Result.fail("查询分类及标签失败");
         }
 
+    }
+
+    /**
+     * @Description : 根据id查询分类 查询大类下分类
+     * @param subjectCategoryDTO
+     * @return
+     */
+    @PostMapping("/queryCategoryByPrimary")
+    public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
+        try{
+            if(log.isInfoEnabled()){
+                // 打印日志
+                log.info("subjectCategoryController.queryCategoryByPrimary.dto:{}", JSON.toJSONString(subjectCategoryDTO));
+            }
+
+            // 断言
+            Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类父级id不能为空");
+
+            // 将DTO转换为BO
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertCategoryDTOtoBO(subjectCategoryDTO);
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
+
+            // 将BO转换为DTO
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convertCategoryBOtoDTOList(subjectCategoryBOList);
+            return Result.ok(subjectCategoryDTOList);
+
+        } catch (Exception e) {
+            // 记录错误日志
+            log.error("subjectCategoryController.queryPrimaryCategoryList.error:{}", e.getMessage(),e);
+            // 返回失败结果
+            return Result.fail("查询大类下分类失败");
+        }
 
     }
+
+    /**
+     * @Description : 更新分类
+     * @return subjectCategoryDTO
+     */
+    @PostMapping("/update")
+    public Result<Boolean> update(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
+        try{
+            // 打印日志
+            if(log.isInfoEnabled()){
+                log.info("subjectCategoryController.update.dto:{}", JSON.toJSONString(subjectCategoryDTO));
+            }
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertCategoryDTOtoBO(subjectCategoryDTO);
+
+            // 查询一级分类列表
+            Boolean result = subjectCategoryDomainService.update(subjectCategoryBO);
+
+            // 返回成功结果
+            return Result.ok(result);
+        }catch (Exception e){
+            // 记录错误日志
+            log.error("subjectCategoryController.queryPrimaryCategoryList.error:{}", e.getMessage(),e);
+            // 返回失败结果
+            return Result.fail("更新分类");
+        }
+
+    }
+
 }

@@ -57,9 +57,11 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
      * @return 实例对象
      */
     @Override
-    public SubjectCategory update(SubjectCategory subjectCategory) {
-        this.subjectCategoryDao.update(subjectCategory);
-        return this.queryById(subjectCategory.getId());
+    public int update(SubjectCategory subjectCategory) {
+        if(log.isInfoEnabled()){
+            log.info("subjectCategoryServiceImpl.update.subjectCategory:", JSON.toJSONString(subjectCategory));
+        }
+        return this.subjectCategoryDao.update(subjectCategory);
     }
 
     /**
@@ -74,7 +76,7 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
     }
 
     @Override
-    public List<SubjectCategory> queryParimaryCategory(SubjectCategory subjectCategory) {
-        return this.subjectCategoryDao.queryParimaryCategory(subjectCategory);
+    public List<SubjectCategory> queryCategory(SubjectCategory subjectCategory) {
+        return this.subjectCategoryDao.queryCategory(subjectCategory);
     }
 }
