@@ -28,4 +28,11 @@ public interface SubjectCategoryDomainService {
      * @return
      */
     Boolean update(SubjectCategoryBO subjectCategoryBO);
+
+    /**
+     * 删除分类
+     * @param subjectCategoryBO
+     * @return
+     */
+    Boolean deleted(SubjectCategoryBO subjectCategoryBO);
 }

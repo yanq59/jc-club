@@ -1,6 +1,7 @@
 package com.shaqima.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.domain.convert.SubjectCategoryConverter;
 import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import com.shaqima.subject.domain.service.SubjectCategoryDomainService;
@@ -39,6 +40,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
         // 将subjectCategoryBO转换为SubjectCategory
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOtoCategory(subjectCategoryBO);
 
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
         // 调用subjectCategoryService的insert方法，将subjectCategory插入数据库
         subjectCategoryService.insert(subjectCategory);
     }
@@ -47,6 +49,8 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     public List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO) {
 
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOtoCategory(subjectCategoryBO);
+
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
 
         // 将查询结果转换为BO对象
         List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
@@ -69,12 +73,22 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
         if (log.isInfoEnabled()) {
             log.info("subjectCategoryDomainServiceImpl.update.subjectCategory:{}", JSON.toJSONString(subjectCategoryBO));
         }
-        SubjectCategory subjectCategory1 = new SubjectCategory(1L,"houdan",1,"url",2L,"SS",new Date(),"SS",new Date(),1);
         // 更新subjectCategory
-        int count = subjectCategoryService.update(subjectCategory1);
-//        int count = subjectCategoryService.update(subjectCategory);
+        int count = subjectCategoryService.update(subjectCategory);
 
         // 返回更新结果
         return count > 0;
+    }
+
+    @Override
+    public Boolean deleted(SubjectCategoryBO subjectCategoryBO) {
+        // 将subjectCategoryBO转换为SubjectCategory
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOtoCategory(subjectCategoryBO);
+
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
+        int count = subjectCategoryService.update(subjectCategory);
+
+        return count > 0;
+
     }
 }

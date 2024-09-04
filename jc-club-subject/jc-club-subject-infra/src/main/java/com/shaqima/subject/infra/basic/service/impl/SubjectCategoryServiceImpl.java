@@ -61,7 +61,8 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
         if(log.isInfoEnabled()){
             log.info("subjectCategoryServiceImpl.update.subjectCategory:", JSON.toJSONString(subjectCategory));
         }
-        return this.subjectCategoryDao.update(subjectCategory);
+        int count = subjectCategoryDao.update(subjectCategory);
+        return count;
     }
 
     /**

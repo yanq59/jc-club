@@ -23,46 +23,6 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-<!--    <select id="queryAllByLimit" resultMap="SubjectCategoryMap">-->
-<!--        select-->
-<!--          id, category_name, category_type, image_url, parent_id, created_by, created_time, update_by, update_time, is_deleted-->
-<!--        from subject_category-->
-<!--        <where>-->
-<!--            <if test="id != null">-->
-<!--                and id = #{id}-->
-<!--            </if>-->
-<!--            <if test="categoryName != null and categoryName != ''">-->
-<!--                and category_name = #{categoryName}-->
-<!--            </if>-->
-<!--            <if test="categoryType != null">-->
-<!--                and category_type = #{categoryType}-->
-<!--            </if>-->
-<!--            <if test="imageUrl != null and imageUrl != // 将subjectCategoryBO转换为SubjectCategory
-SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOtoCategory(subjectCategoryBO);
-// 更新subjectCategory
-int count = subjectCategoryService.update(subjectCategory);
-// 返回更新结果
-return count > 0;if>-->
-<!--            <if test="createdBy != null and createdBy != ''">-->
-<!--                and created_by = #{createdBy}-->
-<!--            </if>-->
-<!--            <if test="createdTime != null">-->
-<!--                and created_time = #{createdTime}-->
-<!--            </if>-->
-<!--            <if test="updateBy != null and updateBy != ''">-->
-<!--                and update_by = #{updateBy}-->
-<!--            </if>-->
-<!--            <if test="updateTime != null">-->
-<!--                and update_time = #{updateTime}-->
-<!--            </if>-->
-<!--            <if test="isDeleted != null">-->
-<!--                and is_deleted = #{isDeleted}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--        limit #{pageable.offset}, #{pageable.pageSize}-->
-<!--    </select>-->
-
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
@@ -167,6 +127,7 @@ return count > 0;if>-->
         </set>
         where id = #{id}
     </update>
+
 
     <!--通过主键删除-->
     <delete id="deleteById">
