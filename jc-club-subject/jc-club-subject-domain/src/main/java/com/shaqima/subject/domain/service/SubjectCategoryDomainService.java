@@ -6,7 +6,7 @@ import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 import java.util.List;
 
 /**
- * @Description :
+ * @Description : 题目大类领域服务
  * @Author : wang.yanqi
  * @Date: 2024/9/1 16:43
  */

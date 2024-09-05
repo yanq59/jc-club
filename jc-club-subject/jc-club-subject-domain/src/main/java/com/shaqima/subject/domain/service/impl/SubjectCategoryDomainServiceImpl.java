@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +19,7 @@ import java.util.List;
  * @Date: 2024/9/1 16:44
  */
 
-@Service("SubjectCategoryDomainService")
+@Service
 @Slf4j
 public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainService {
 

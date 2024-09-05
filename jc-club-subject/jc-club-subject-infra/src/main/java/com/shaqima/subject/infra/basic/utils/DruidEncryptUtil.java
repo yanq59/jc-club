@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
 /**
- * @Description :
+ * @Description : druid 加密工具类
  * @Author : wang.yanqi
  * @Date: 2024/8/31 2:36
  */

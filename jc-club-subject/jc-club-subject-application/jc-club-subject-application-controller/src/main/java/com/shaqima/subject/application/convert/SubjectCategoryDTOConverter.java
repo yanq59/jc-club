@@ -18,12 +18,14 @@ public interface SubjectCategoryDTOConverter {
     // 定义一个单例实例
     SubjectCategoryDTOConverter INSTANCE = Mappers.getMapper(SubjectCategoryDTOConverter.class);
 
+//    // 将SubjectCategoryDTO转换为SubjectCategoryBO
+//    SubjectCategoryBO convertDTOtoCategoryBO(SubjectCategoryDTO subjectCategoryDTO);
+
     // 将SubjectCategoryDTO转换为SubjectCategoryBO
-    SubjectCategoryBO convertDTOtoCategoryBO(SubjectCategoryDTO subjectCategoryDTO);
+    SubjectCategoryBO convertCategoryDTOtoBO(SubjectCategoryDTO subjectCategoryDTO);
 
     // 将SubjectCategoryBO转换为SubjectCategoryDTO
     List<SubjectCategoryDTO> convertCategoryBOtoDTOList(List<SubjectCategoryBO> subjectCategoryBOList);
 
-    // 将SubjectCategoryDTO转换为SubjectCategoryBO
-    SubjectCategoryBO convertCategoryDTOtoBO(SubjectCategoryDTO subjectCategoryDTO);
+
 }

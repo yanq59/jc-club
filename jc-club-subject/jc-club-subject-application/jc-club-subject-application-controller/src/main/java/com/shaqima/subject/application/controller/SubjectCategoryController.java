@@ -51,7 +51,7 @@ public class SubjectCategoryController {
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类父级id不能为空");
 
             // 将DTO转换为BO
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOtoCategoryBO(subjectCategoryDTO);
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertCategoryDTOtoBO(subjectCategoryDTO);
             // 调用领域服务添加分类
             subjectCategoryDomainService.add(subjectCategoryBO);
 
