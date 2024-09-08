@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 题目标签表(SubjectLabel)表服务实现类
@@ -63,5 +65,10 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectLabelDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<SubjectLabel> batchQueryById(List<Long> labelIdList) {
+        return this.subjectLabelDao.batchQueryById(labelIdList);
     }
 }

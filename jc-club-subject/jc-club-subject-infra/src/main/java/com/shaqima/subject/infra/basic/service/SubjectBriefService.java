@@ -1,17 +1,14 @@
 package com.shaqima.subject.infra.basic.service;
 
-import com.shaqima.subject.infra.basic.entity.SubjectLabel;
-
-import java.util.List;
-
+import com.shaqima.subject.infra.basic.entity.SubjectBrief;
 
 /**
- * 题目标签表(SubjectLabel)表服务接口
+ * 简答题(SubjectBrief)表服务接口
  *
  * @author makejava
- * @since 2024-09-05 23:44:32
+ * @since 2024-09-09 00:11:46
  */
-public interface SubjectLabelService {
+public interface SubjectBriefService {
 
     /**
      * 通过ID查询单条数据
@@ -19,25 +16,24 @@ public interface SubjectLabelService {
      * @param id 主键
      * @return 实例对象
      */
-    SubjectLabel queryById(Long id);
-
+    SubjectBrief queryById(Long id);
 
 
     /**
      * 新增数据
      *
-     * @param subjectLabel 实例对象
+     * @param subjectBrief 实例对象
      * @return 实例对象
      */
-    int insert(SubjectLabel subjectLabel);
+    SubjectBrief insert(SubjectBrief subjectBrief);
 
     /**
      * 修改数据
      *
-     * @param subjectLabel 实例对象
+     * @param subjectBrief 实例对象
      * @return 实例对象
      */
-    int update(SubjectLabel subjectLabel);
+    SubjectBrief update(SubjectBrief subjectBrief);
 
     /**
      * 通过主键删除数据
@@ -47,6 +43,4 @@ public interface SubjectLabelService {
      */
     boolean deleteById(Long id);
 
-
-    List<SubjectLabel> batchQueryById(List<Long> labelIdList);
 }

@@ -1,17 +1,17 @@
 package com.shaqima.subject.infra.basic.mapper;
 
-import com.shaqima.subject.infra.basic.entity.SubjectLabel;
+import com.shaqima.subject.infra.basic.entity.SubjectRadio;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * 题目标签表(SubjectLabel)表数据库访问层
+ * 单选题信息表(SubjectRadio)表数据库访问层
  *
  * @author makejava
- * @since 2024-09-05 23:45:08
+ * @since 2024-09-09 00:13:19
  */
-public interface SubjectLabelDao {
+public interface SubjectRadioDao {
 
     /**
      * 通过ID查询单条数据
@@ -19,48 +19,48 @@ public interface SubjectLabelDao {
      * @param id 主键
      * @return 实例对象
      */
-    SubjectLabel queryById(Long id);
+    SubjectRadio queryById(Long id);
 
     /**
      * 统计总行数
      *
-     * @param subjectLabel 查询条件
+     * @param subjectRadio 查询条件
      * @return 总行数
      */
-    long count(SubjectLabel subjectLabel);
+    long count(SubjectRadio subjectRadio);
 
     /**
      * 新增数据
      *
-     * @param subjectLabel 实例对象
+     * @param subjectRadio 实例对象
      * @return 影响行数
      */
-    int insert(SubjectLabel subjectLabel);
+    int insert(SubjectRadio subjectRadio);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<SubjectLabel> 实例对象列表
+     * @param entities List<SubjectRadio> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<SubjectLabel> entities);
+    int insertBatch(@Param("entities") List<SubjectRadio> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<SubjectLabel> 实例对象列表
+     * @param entities List<SubjectRadio> 实例对象列表
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<SubjectLabel> entities);
+    int insertOrUpdateBatch(@Param("entities") List<SubjectRadio> entities);
 
     /**
      * 修改数据
      *
-     * @param subjectLabel 实例对象
+     * @param subjectRadio 实例对象
      * @return 影响行数
      */
-    int update(SubjectLabel subjectLabel);
+    int update(SubjectRadio subjectRadio);
 
     /**
      * 通过主键删除数据
@@ -70,7 +70,5 @@ public interface SubjectLabelDao {
      */
     int deleteById(Long id);
 
-
-    List<SubjectLabel> batchQueryById(@Param("list") List<Long> labelIdList);
 }
 

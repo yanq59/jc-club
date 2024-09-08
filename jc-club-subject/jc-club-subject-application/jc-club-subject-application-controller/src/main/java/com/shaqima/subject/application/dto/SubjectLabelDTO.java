@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 题目标签表(SubjectLabel)DTO
@@ -33,7 +32,7 @@ public class SubjectLabelDTO implements Serializable {
      */
     private String labelName;
     /**
-     * 排序
+     * 排序排名
      */
     private Integer sortNum;
 

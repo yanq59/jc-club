@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,8 +80,8 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
         SubjectLabel subjectLabel = SubjectLabelConverter.INSTANCE.convertBOtoLabel(subjectLabelBO);
 
         subjectLabel.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
-
-        return subjectLabelService.deleteById(subjectLabel.getId());
+        int count = subjectLabelService.update(subjectLabel);
+        return count > 0;
 
 
     }
@@ -92,7 +93,7 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
         SubjectMapping subjectMapping = new SubjectMapping();
         subjectMapping.setCategoryId(categoryId);
         subjectMapping.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
-
+//        查询标签id
         List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
 
         if(CollectionUtils.isEmpty(mappingList)){
@@ -100,11 +101,21 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
         }
 
         /**
-         * SubjectMapping::getLabelId 是一个方法引用，它指向 SubjectMapping 类的 getLabelId 方法。这个操作会将 Stream 中的每个 SubjectMapping 对象转换成它的 labelId。
+         * SubjectMapping::getLabelId 是一个方法引用，它指向 SubjectMapping 类的 getLabelId 方法。
+         * 这个操作会将 Stream 中的每个 SubjectMapping 对象转换成它的 labelId。
          */
-        List<Long> labelList =  mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
-
-        return Collections.emptyList();
+        List<Long> labelIdList =  mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
+        List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
+        List<SubjectLabelBO> boList = new LinkedList<>();
+        labelList.forEach(label -> {
+            SubjectLabelBO bo = new SubjectLabelBO();
+            bo.setId(label.getId());
+            bo.setLabelName(label.getLabelName());
+            bo.setCategoryId(categoryId);
+            bo.setSortNum(label.getSortNum());
+            boList.add(bo);
+        });
+        return boList;
     }
 
 }

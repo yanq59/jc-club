@@ -31,12 +31,11 @@ public class SubjectCategoryController {
     private SubjectCategoryDomainService subjectCategoryDomainService;
 
     /**
-     * @Description : 给 subject_category 表添加数据
+     * @Description : 给 subject_category 表添加数据 添加分类
      * @param subjectCategoryDTO
      * @return Result<Boolean>
      */
     @PostMapping("/add")
-    // 添加分类
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
         try{
             if(log.isInfoEnabled()){

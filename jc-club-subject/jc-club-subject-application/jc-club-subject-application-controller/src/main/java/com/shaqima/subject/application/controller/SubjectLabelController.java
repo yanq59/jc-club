@@ -137,12 +137,12 @@ public class SubjectLabelController {
 
             // 将DTO转换为BO
             SubjectLabelBO subjectLabelBO = SubjectLabelDTOConverter.INSTANCE.convertLabelDTOtoBO(subjectLabelDTO);
+
             // 调用领域服务添加分类
             List<SubjectLabelBO> resultList = subjectLabelDomainService.queryLabelByCategoryId(subjectLabelBO);
 
             List<SubjectLabelDTO> subjectLabelDTOS = SubjectLabelDTOConverter.INSTANCE.convertLabelBOtoDTOList(resultList);
-
-            return Result.ok(result);
+            return Result.ok(subjectLabelDTOS);
         }catch (Exception e){
             log.error("SubjectLabelController.queryLabelByCategoryId.error:{}", e);
             // 捕获异常并返回错误信息
