@@ -10,7 +10,7 @@ import com.shaqima.subject.application.dto.SubjectInfoDTO;
 import com.shaqima.subject.common.entity.Result;
 import com.shaqima.subject.domain.entity.SubjectAnswerBO;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
-import com.shaqima.subject.infra.basic.service.SubjectCategoryService;
+import com.shaqima.subject.domain.service.SubjectInfoDomainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +31,7 @@ import java.util.List;
 public class SubjectController {
 
     @Resource
-    private SubjectCategoryService subjectCategoryService;
+    private SubjectInfoDomainService subjectInfoDomainService;
 
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectInfoDTO subjectInfoDTO){
@@ -56,13 +56,13 @@ public class SubjectController {
             subjectInfoBO.setOptionList(subjectAnswerBOS);
 
             // 调用领域服务添加分类
-            subjectCategoryDomainService.add(subjectCategoryBO);
+            subjectInfoDomainService.add(subjectInfoBO);
 
             return Result.ok(true);
         }catch (Exception e){
-            log.error("subjectCategoryController.add.error:{}", e.getMessage(),e);
+            log.error("SubjectController.add.error:{}", e.getMessage(),e);
             // 捕获异常并返回错误信息
-            return Result.fail(e.getMessage());
+            return Result.fail("新增题目失败");
         }
     }
 }

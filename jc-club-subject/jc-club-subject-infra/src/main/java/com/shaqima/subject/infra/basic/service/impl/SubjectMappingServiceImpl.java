@@ -6,7 +6,6 @@ import com.shaqima.subject.infra.basic.service.SubjectMappingService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -75,5 +74,10 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
     @Override
     public List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping) {
         return this.subjectMappingDao.queryDistinctLabelId(subjectMapping);
+    }
+
+    @Override
+    public void batchInsert(List<SubjectMapping> mappingList) {
+        this.subjectMappingDao.insertBatch(mappingList);
     }
 }

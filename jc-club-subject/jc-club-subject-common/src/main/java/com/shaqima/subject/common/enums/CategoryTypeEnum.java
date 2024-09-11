@@ -20,11 +20,13 @@ public enum CategoryTypeEnum {
     }
 
     // 根据状态码获取枚举值
-    public static ResultCodeEnum getByCode(int codeVal) {
-        for ( ResultCodeEnum resultCodeEnum : ResultCodeEnum.values()) {
-            if (resultCodeEnum.code == codeVal)
+    public static CategoryTypeEnum getByCode(int codeVal){
+        for(CategoryTypeEnum resultCodeEnum : CategoryTypeEnum.values()){
+            if(resultCodeEnum.code == codeVal){
                 return resultCodeEnum;
+            }
         }
         return null;
     }
+
 }

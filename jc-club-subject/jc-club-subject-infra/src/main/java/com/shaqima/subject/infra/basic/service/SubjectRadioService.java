@@ -2,6 +2,8 @@ package com.shaqima.subject.infra.basic.service;
 
 import com.shaqima.subject.infra.basic.entity.SubjectRadio;
 
+import java.util.List;
+
 /**
  * 单选题信息表(SubjectRadio)表服务接口
  *
@@ -18,8 +20,6 @@ public interface SubjectRadioService {
      */
     SubjectRadio queryById(Long id);
 
-
-
     /**
      * 新增数据
      *
@@ -28,6 +28,12 @@ public interface SubjectRadioService {
      */
     SubjectRadio insert(SubjectRadio subjectRadio);
 
+    /**
+     * 批量插入
+     * @param subjectRadioList
+     * @return
+     */
+    void batchInsert(List<SubjectRadio> subjectRadioList);
     /**
      * 修改数据
      *
