@@ -4,9 +4,7 @@ import com.shaqima.subject.infra.basic.entity.SubjectBrief;
 import com.shaqima.subject.infra.basic.mapper.SubjectBriefDao;
 import com.shaqima.subject.infra.basic.service.SubjectBriefService;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+
 
 import javax.annotation.Resource;
 
