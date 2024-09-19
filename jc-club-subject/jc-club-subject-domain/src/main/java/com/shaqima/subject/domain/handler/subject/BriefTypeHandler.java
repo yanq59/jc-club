@@ -4,6 +4,7 @@ import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
 import com.shaqima.subject.domain.convert.BriefSubjectConverter;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
+import com.shaqima.subject.domain.entity.SubjectOptionBO;
 import com.shaqima.subject.infra.basic.entity.SubjectBrief;
 import com.shaqima.subject.infra.basic.service.SubjectBriefService;
 import org.springframework.stereotype.Component;
@@ -33,5 +34,13 @@ public class BriefTypeHandler implements SubjectTypeHandler{
         subjectBrief.setSubjectId(subjectInfoBO.getId().intValue());
         subjectBrief.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
         subjectBriefService.insert(subjectBrief);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectBrief subjectBrief = subjectBriefService.queryById(Long.valueOf(subjectId));
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setSubjectAnswer(subjectBrief.getSubjectAnswer());
+        return subjectOptionBO;
     }
 }

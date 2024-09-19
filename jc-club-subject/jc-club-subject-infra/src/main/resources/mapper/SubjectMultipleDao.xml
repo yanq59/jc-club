@@ -105,7 +105,7 @@
         insert into
         subject_multiple(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
         values
-        (#{subjectId}#{optionType}#{optionContent}#{isCorrect}#{createdBy}#{createdTime}#{updateBy}#{updateTime}#{isDeleted})
+        (#{subjectId},#{optionType},#{optionContent},#{isCorrect},#{createdBy},#{createdTime},#{updateBy},#{updateTime},#{isDeleted})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
@@ -113,7 +113,7 @@
         subject_multiple(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.subjectId}#{entity.optionType}#{entity.optionContent}#{entity.isCorrect}#{entity.createdBy}#{entity.createdTime}#{entity.updateBy}#{entity.updateTime}#{entity.isDeleted})
+            (#{entity.subjectId},#{entity.optionType},#{entity.optionContent},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
         </foreach>
     </insert>
 
@@ -122,7 +122,7 @@
         subject_multiple(subject_id,option_type,option_content,is_correct,created_by,created_time,update_by,update_time,is_deleted)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.subjectId}#{entity.optionType}#{entity.optionContent}#{entity.isCorrect}#{entity.createdBy}#{entity.createdTime}#{entity.updateBy}#{entity.updateTime}#{entity.isDeleted})
+            (#{entity.subjectId},#{entity.optionType},#{entity.optionContent},#{entity.isCorrect},#{entity.createdBy},#{entity.createdTime},#{entity.updateBy},#{entity.updateTime},#{entity.isDeleted})
         </foreach>
         on duplicate key update
         subject_id = values(subject_id)option_type = values(option_type)option_content =

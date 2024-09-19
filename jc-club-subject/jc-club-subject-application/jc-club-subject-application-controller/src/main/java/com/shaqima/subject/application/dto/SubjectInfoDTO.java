@@ -1,5 +1,6 @@
 package com.shaqima.subject.application.dto;
 
+import com.shaqima.subject.common.entity.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubjectInfoDTO implements Serializable {
+public class SubjectInfoDTO extends PageInfo implements Serializable {
     private static final long serialVersionUID = 767007477552274931L;
     /**
      * 主键
@@ -58,9 +59,17 @@ public class SubjectInfoDTO implements Serializable {
      */
     private List<Integer> labelIds;
     /**
+     * 标签name
+     */
+    private List<String> labelName;
+    /**
      * 答案选项
      */
     private List<SubjectAnswerDTO> optionList;
+
+    private Long categoryId;
+
+    private Long labelId;
 
 
 

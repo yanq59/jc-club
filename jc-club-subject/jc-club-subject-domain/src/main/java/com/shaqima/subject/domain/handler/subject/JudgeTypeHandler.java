@@ -4,6 +4,7 @@ import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
 import com.shaqima.subject.domain.entity.SubjectAnswerBO;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
+import com.shaqima.subject.domain.entity.SubjectOptionBO;
 import com.shaqima.subject.infra.basic.entity.SubjectJudge;
 import com.shaqima.subject.infra.basic.service.SubjectJudgeService;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class JudgeTypeHandler implements SubjectTypeHandler{
     @Resource
     private SubjectJudgeService subjectJudgeService;
 
-//    说明当前的策略只能处理单选的
+//    说明当前的策略只能处理判断提的
     @Override
     public SubjectInfoTypeEnum getHandlerType() {
         return SubjectInfoTypeEnum.JUDGE;
@@ -35,5 +36,10 @@ public class JudgeTypeHandler implements SubjectTypeHandler{
         subjectJudge.setIsCorrect(subjectAnswerBO.getIsCorrect());
         subjectJudge.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
         subjectJudgeService.insert(subjectJudge);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        return null;
     }
 }

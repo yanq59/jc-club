@@ -1,5 +1,6 @@
 package com.shaqima.subject.domain.service;
 
+import com.shaqima.subject.common.entity.PageResult;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
 
 /**
@@ -16,5 +17,17 @@ public interface SubjectInfoDomainService {
      */
     void add(SubjectInfoBO subjectInfoBO);
 
+    /**
+     * 分页查询
+     * @param subjectInfoBO
+     * @return
+     */
+    PageResult<SubjectInfoBO> getSubjectPage(SubjectInfoBO subjectInfoBO);
 
+    /**
+     * 查询题目信息
+     * @param subjectInfoBO
+     * @return
+     */
+    SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO);
 }

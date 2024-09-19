@@ -1,5 +1,6 @@
 package com.shaqima.subject.infra.basic.entity;
 
+import com.shaqima.subject.common.entity.PageInfo;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * @since 2024-09-09 00:11:29
  */
 @Data
-public class SubjectInfo implements Serializable {
+public class SubjectInfo extends PageInfo implements Serializable {
     private static final long serialVersionUID = 767007477552274931L;
     /**
      * 主键

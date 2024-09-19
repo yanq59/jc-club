@@ -35,8 +35,6 @@ public interface SubjectMultipleService {
      */
     void batchInsert(List<SubjectMultiple> subjectMultipleList);
 
-
-
     /**
      * 修改数据
      *

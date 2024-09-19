@@ -1,11 +1,14 @@
 package com.shaqima.subject.domain.handler.subject;
 
+import com.alibaba.fastjson.JSON;
 import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
 import com.shaqima.subject.domain.convert.RadioSubjectConverter;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
+import com.shaqima.subject.domain.entity.SubjectOptionBO;
 import com.shaqima.subject.infra.basic.entity.SubjectRadio;
 import com.shaqima.subject.infra.basic.service.SubjectRadioService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +20,7 @@ import java.util.List;
  * @Author: wang.yanqi
  * @CreateTime: 2024-09-11
  */
+@Slf4j
 @Component
 public class RadioTypeHandler implements SubjectTypeHandler{
     @Resource
@@ -38,7 +42,16 @@ public class RadioTypeHandler implements SubjectTypeHandler{
             subjectRadio.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
             subjectRadioList.add(subjectRadio);
         });
+        if (log.isInfoEnabled()) {
+            // 打印日志
+            log.info("RadioTypeHandler.add.bo:{}", JSON.toJSONString(subjectRadioList));
+        }
         subjectRadioService.batchInsert(subjectRadioList);
 
+    }
+    
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        return null;
     }
 }

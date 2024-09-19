@@ -1,8 +1,7 @@
 package com.shaqima.subject.domain.convert;
 
-import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
-import com.shaqima.subject.infra.basic.entity.SubjectCategory;
+import com.shaqima.subject.domain.entity.SubjectOptionBO;
 import com.shaqima.subject.infra.basic.entity.SubjectInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -23,7 +22,11 @@ public interface SubjectInfoConverter {
     // 将SubjectInfoBO转换为SubjectInfo
     SubjectInfo convertBOtoInfo(SubjectInfoBO subjectInfoBO);
 
-    List<SubjectCategoryBO> convertCategoryToBO(List<SubjectCategory> subjectCategoryList);
+    SubjectInfoBO convertOptiontoBO(SubjectOptionBO subjectOptionBO);
+
+    SubjectInfoBO convertOptionAndInfotoBO(SubjectOptionBO subjectOptionBO,SubjectInfo subjectInfo);
+
+    List<SubjectInfoBO> convertListInfoToBO(List<SubjectInfo> subjectInfoList);
 
 
 }

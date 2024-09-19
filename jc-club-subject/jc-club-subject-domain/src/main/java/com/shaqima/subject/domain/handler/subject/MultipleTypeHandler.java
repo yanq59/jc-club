@@ -4,6 +4,7 @@ import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
 import com.shaqima.subject.domain.convert.MultipleSubjectConverter;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
+import com.shaqima.subject.domain.entity.SubjectOptionBO;
 import com.shaqima.subject.infra.basic.entity.SubjectMultiple;
 import com.shaqima.subject.infra.basic.service.SubjectMultipleService;
 import org.springframework.stereotype.Component;
@@ -39,5 +40,10 @@ public class MultipleTypeHandler implements SubjectTypeHandler{
             subjectMultipleList.add(subjectMultiple);
         });
         subjectMultipleService.batchInsert(subjectMultipleList);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        return null;
     }
 }

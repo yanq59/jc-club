@@ -2,6 +2,7 @@ package com.shaqima.subject.domain.handler.subject;
 
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
+import com.shaqima.subject.domain.entity.SubjectOptionBO;
 
 /**
  * @Description:
@@ -22,5 +23,11 @@ public interface SubjectTypeHandler {
      * @param subjectInfoBO
      */
     void add(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 实际的题目的插入
+     * @param subjectId
+     */
+    SubjectOptionBO query(int subjectId);
 
 }
