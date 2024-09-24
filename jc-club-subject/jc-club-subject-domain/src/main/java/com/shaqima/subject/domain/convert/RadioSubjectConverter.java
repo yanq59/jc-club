@@ -1,8 +1,6 @@
 package com.shaqima.subject.domain.convert;
 
 import com.shaqima.subject.domain.entity.SubjectAnswerBO;
-import com.shaqima.subject.domain.entity.SubjectCategoryBO;
-import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 import com.shaqima.subject.infra.basic.entity.SubjectRadio;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -23,7 +21,7 @@ public interface RadioSubjectConverter {
     // 将SubjectInfoBO转换为SubjectInfo
     SubjectRadio convertBOtoRadio(SubjectAnswerBO subjectAnswerBO);
 
-    List<SubjectCategoryBO> convertCategoryToBO(List<SubjectCategory> subjectCategoryList);
+    List<SubjectAnswerBO> convertEntityToBoList(List<SubjectRadio> subjectRadioList);
 
 
 }

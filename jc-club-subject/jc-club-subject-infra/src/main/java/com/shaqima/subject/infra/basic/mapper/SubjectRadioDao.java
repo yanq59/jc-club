@@ -70,5 +70,7 @@ public interface SubjectRadioDao {
      */
     int deleteById(Long id);
 
+    List<SubjectRadio> queryAllByLimit(SubjectRadio subjectRadio);
+
 }
 

@@ -6,6 +6,7 @@ import com.shaqima.subject.infra.basic.service.SubjectMultipleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,5 +70,10 @@ public class SubjectMultipleServiceImpl implements SubjectMultipleService {
     @Override
     public boolean deleteById(Long id) {
         return this.subjectMultipleDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<SubjectMultiple> queryByCondition(SubjectMultiple subjectMultiple) {
+        return this.subjectMultipleDao.queryAllByLimit(subjectMultiple);
     }
 }

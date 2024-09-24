@@ -3,9 +3,12 @@ package com.shaqima.subject.domain.handler.subject;
 import com.alibaba.fastjson.JSON;
 import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
+import com.shaqima.subject.domain.convert.MultipleSubjectConverter;
 import com.shaqima.subject.domain.convert.RadioSubjectConverter;
+import com.shaqima.subject.domain.entity.SubjectAnswerBO;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
 import com.shaqima.subject.domain.entity.SubjectOptionBO;
+import com.shaqima.subject.infra.basic.entity.SubjectMultiple;
 import com.shaqima.subject.infra.basic.entity.SubjectRadio;
 import com.shaqima.subject.infra.basic.service.SubjectRadioService;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +55,12 @@ public class RadioTypeHandler implements SubjectTypeHandler{
     
     @Override
     public SubjectOptionBO query(int subjectId) {
-        return null;
+        SubjectRadio subjectRadio = new SubjectRadio();
+        subjectRadio.setSubjectId(Long.valueOf(subjectId));
+        List<SubjectRadio> result = subjectRadioService.queryByCondition(subjectRadio);
+        List<SubjectAnswerBO> subjectAnswerBOList = RadioSubjectConverter.INSTANCE.convertEntityToBoList(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
     }
 }

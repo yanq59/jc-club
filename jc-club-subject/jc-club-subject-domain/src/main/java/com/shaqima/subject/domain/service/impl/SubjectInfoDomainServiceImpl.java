@@ -10,17 +10,19 @@ import com.shaqima.subject.domain.handler.subject.SubjectTypeHandler;
 import com.shaqima.subject.domain.handler.subject.SubjectTypeHandlerFactory;
 import com.shaqima.subject.domain.service.SubjectInfoDomainService;
 import com.shaqima.subject.infra.basic.entity.SubjectInfo;
+import com.shaqima.subject.infra.basic.entity.SubjectLabel;
 import com.shaqima.subject.infra.basic.entity.SubjectMapping;
 import com.shaqima.subject.infra.basic.service.SubjectInfoService;
+import com.shaqima.subject.infra.basic.service.SubjectLabelService;
 import com.shaqima.subject.infra.basic.service.SubjectMappingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Description:
@@ -38,6 +40,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
     private SubjectMappingService subjectMappingService;
     @Resource
     private SubjectTypeHandlerFactory subjectTypeHandlerFactory; //注入工厂
+    @Resource
+    private SubjectLabelService subjectLabelService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -108,7 +112,18 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
         SubjectTypeHandler handler = subjectTypeHandlerFactory.getHandler(subjectType);
         SubjectOptionBO optionBO = handler.query(subjectInfo.getId().intValue());
         SubjectInfoBO bo = SubjectInfoConverter.INSTANCE.convertOptionAndInfotoBO(optionBO,subjectInfo);
-        List<String> labelNameList = new ArrayList<>();
+
+//      通过subjectMapping获得labelName
+        SubjectMapping subjectMapping = new SubjectMapping();
+        subjectMapping.setSubjectId(subjectInfo.getId());
+        subjectMapping.setIsDeleted(IsDeletedFlagEnum.NO_DELETED.getCode());
+        List<SubjectMapping> mappingList = subjectMappingService.queryLabelId(subjectMapping);
+
+        List<Long> labelIdList = mappingList.stream().map(SubjectMapping::getLabelId).collect(Collectors.toList());
+
+        List<SubjectLabel> labelList = subjectLabelService.batchQueryById(labelIdList);
+        List<String> labelNameList = labelList.stream().map(SubjectLabel::getLabelName).collect(Collectors.toList());
+
 //        转换
         bo.setLabelName(labelNameList);
         return bo;

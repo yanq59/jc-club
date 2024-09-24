@@ -2,6 +2,7 @@ package com.shaqima.subject.domain.handler.subject;
 
 import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
+import com.shaqima.subject.domain.convert.JudgeSubjectConverter;
 import com.shaqima.subject.domain.entity.SubjectAnswerBO;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
 import com.shaqima.subject.domain.entity.SubjectOptionBO;
@@ -10,6 +11,7 @@ import com.shaqima.subject.infra.basic.service.SubjectJudgeService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Description: 判断的题目的策略类
@@ -40,6 +42,12 @@ public class JudgeTypeHandler implements SubjectTypeHandler{
 
     @Override
     public SubjectOptionBO query(int subjectId) {
-        return null;
+        SubjectJudge subjectJudge = new SubjectJudge();
+        subjectJudge.setSubjectId(Long.valueOf(subjectId));
+        List<SubjectJudge> result = subjectJudgeService.queryByCondition(subjectJudge);
+        List<SubjectAnswerBO> subjectAnswerBOList = JudgeSubjectConverter.INSTANCE.convertEntityToBoList(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
     }
 }

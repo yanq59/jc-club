@@ -119,8 +119,6 @@ public class SubjectController {
 //          参数校验(相当于断言)
 //          如果不满足条件直接 异常 走 catch 那步
             Preconditions.checkNotNull(subjectInfoDTO.getId(), "题目id不能为空");
-            Preconditions.checkNotNull(subjectInfoDTO.getCategoryId(), "分类id不能为空");
-            Preconditions.checkNotNull(subjectInfoDTO.getLabelId(), "标签id不能为空");
 
             // 将DTO转换为BO
             SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.convertInfoDTOtoBO(subjectInfoDTO);
@@ -133,7 +131,7 @@ public class SubjectController {
         }catch (Exception e){
             log.error("SubjectController.add.error:{}", e.getMessage(),e);
             // 捕获异常并返回错误信息
-            return Result.fail("新增题目失败");
+            return Result.fail("查询题目详情失败");
         }
     }
 }

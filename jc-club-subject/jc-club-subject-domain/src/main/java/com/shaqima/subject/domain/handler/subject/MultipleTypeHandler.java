@@ -3,6 +3,7 @@ package com.shaqima.subject.domain.handler.subject;
 import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.common.enums.SubjectInfoTypeEnum;
 import com.shaqima.subject.domain.convert.MultipleSubjectConverter;
+import com.shaqima.subject.domain.entity.SubjectAnswerBO;
 import com.shaqima.subject.domain.entity.SubjectInfoBO;
 import com.shaqima.subject.domain.entity.SubjectOptionBO;
 import com.shaqima.subject.infra.basic.entity.SubjectMultiple;
@@ -44,6 +45,12 @@ public class MultipleTypeHandler implements SubjectTypeHandler{
 
     @Override
     public SubjectOptionBO query(int subjectId) {
-        return null;
+        SubjectMultiple subjectMultiple = new SubjectMultiple();
+        subjectMultiple.setSubjectId(Long.valueOf(subjectId));
+        List<SubjectMultiple> result = subjectMultipleService.queryByCondition(subjectMultiple);
+        List<SubjectAnswerBO> subjectAnswerBOList = MultipleSubjectConverter.INSTANCE.convertEntityToBoList(result);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setOptionList(subjectAnswerBOList);
+        return subjectOptionBO;
     }
 }
